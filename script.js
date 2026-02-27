@@ -33,9 +33,12 @@ async function displayPosts() {
 
     posts.forEach(post => {
         // Har bir maqola uchun HTML yasaymiz
-        const postHTML = `
-            <article class="post-card">
-                <img src="${post.image_url}" alt="${post.title}">
+        let postHTML = `<article class="post-card">`
+        if (post.image_url) {
+             postHTML += `
+             <img src="${post.image_url}" alt="${post.title}">`
+        }
+        postHTML += `
                 <h1>${post.title}</h1>
                 <p>${post.content}</p>
             </article>
