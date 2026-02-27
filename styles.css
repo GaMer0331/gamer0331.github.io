@@ -10,10 +10,12 @@ header{
    margin: 0 auto;
 }
 main{
-    max-width: 800px;
     margin-top: 20px;
     margin: 0 auto;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 nav{
     height: 60px;
@@ -50,6 +52,10 @@ nav .search-box button {
 nav .search-box button:hover {
     background-color: #555;
 }
+nav .nav-menu{
+    display: flex;
+    gap: 20px;
+}
 nav ul{
     display: flex;
     list-style: none;
@@ -70,12 +76,21 @@ nav ul li a:hover{
     background-color: #555;
     border-radius: 4px;
 }
+.posts{
+    flex-wrap: wrap;
+    display: flex;
+    gap: 20px;
+}
 .post-card {
+    flex-shrink: 0;
+    flex-grow: 0;
     background-color: #fff;
     padding: 20px;
+    margin: 10px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+    width: fit-content;
 }
 .post-card img {
     width: 50%;
@@ -86,11 +101,15 @@ nav ul li a:hover{
 .post-card h2 {
     margin-top: 15px;
     margin-bottom: 10px;
+    align-self: center;
+    padding: 10px;
 }
 .post-card p {
     color: #555;
     white-space: pre-wrap;
+    padding: 5px;
 }
+
 
 footer{
     background-color: #333;
@@ -98,4 +117,16 @@ footer{
     text-align: center;
     padding: 10px;
     margin-top: 20px;
+}
+@media screen and (max-width: 800px) {
+    nav .search-box {
+        display: none;
+    }
+    .post-card img {
+        width: 100%;
+    }
+    .post-card {
+        flex-grow: 1;
+    }
+    
 }
