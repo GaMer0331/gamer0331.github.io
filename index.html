@@ -12,14 +12,14 @@
         <nav>
             <img src="https://xhoopiedolojpdkhypfn.supabase.co/storage/v1/object/public/Images%20For%20MyBlog/logo.png" alt="Blog Logo" class="logo">
             <div class="search-box">
-                <input type="text" placeholder="Maqola qidirish...">
-                <button id="search-btn">Qidirish</button>
+                <input id="search-input" type="text" placeholder="Maqola qidirish...">
+                <button id="search-button">Qidirish</button>
             </div>
             <div class="nav-menu">
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a onclick="displayPosts()">Home</a></li>
                 <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a onclick="displayContacts()">Contact</a></li>
             </ul>
             </div>
         </nav>
