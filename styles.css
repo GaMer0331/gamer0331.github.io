@@ -1,6 +1,5 @@
 *{
     box-sizing: border-box;
-    transition: all 0.3s ease;
 }
 body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -9,6 +8,9 @@ body{
 }
 header{
    margin: 0 auto;
+}
+header *{
+   transition: all 0.3s ease;
 }
 main{
     margin-top: 20px;
@@ -91,7 +93,54 @@ nav ul li a:active{
 .posts{
     flex-wrap: wrap;
     display: flex;
+    justify-content: center;
     gap: 20px;
+}
+.contacts{
+    flex-wrap: nowrap;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.contact-card{
+    background-color: #fff;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 120px;
+    height: 120px;
+    aspect-ratio: 1/1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.contact-card img{
+    width: 50px;
+    padding: 1px;
+    border-radius: 100%;
+    object-fit: cover;
+    filter: brightness(0.66) saturate(0);
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+}
+.contact-card img:hover{
+    filter: brightness(1) saturate(1);
+    box-shadow: 0 4px 10px;
+}
+.contact-card h1{
+    align-self: center;
+    padding: 5px;
+    font-size: 10px;
+}
+.contact-card h1 a{
+    color: #000000;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+.contact-card h1 a:hover{
+    color: #1dbd32;
 }
 .post-card {
     flex-shrink: 0;
@@ -108,7 +157,7 @@ nav ul li a:active{
     height: 220px;
     padding: 5px;
     border-radius: 5px;
-    object-fit: contain;
+    object-fit: cover;
 }
 .post-card h2 {
     margin-top: 15px;
@@ -129,6 +178,20 @@ nav ul li a:active{
     font-weight: bold;
 }
 
+/* About section */
+#about{
+    margin: 10px;
+    padding: 10px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    border: #000000 1px solid;
+    box-shadow: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+#about img{
+    width: 150px;
+}
 
 footer{
     background-color: #333;
@@ -146,6 +209,18 @@ footer{
     }
     .post-card {
         flex-grow: 1;
+    }
+    #about{
+        flex-direction: row;
+        justify-content: center;
+        gap: 20px;
+        overflow: hidden;
+    }
+    #about img{
+        width: 80px
+    }
+    #about *{
+        font-size: 10px;
     }
     
 }
@@ -167,5 +242,4 @@ footer{
     pointer-events: none;
     max-width: 80%;
 }
-
 #toast.visible { opacity: 1; }

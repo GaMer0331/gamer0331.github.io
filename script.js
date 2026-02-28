@@ -78,15 +78,15 @@ async function displayContacts() {
         return;
     }
 
-    const container = document.getElementById('post-container');
+    const container = document.getElementById('contact-container');
     container.innerHTML = ''; // Oldingi matnlarni tozalash
 
     Contacts.forEach(Contact => {
-        // Har bir maqola uchun HTML yasaymiz
-        let ContactHTML = `<article class="post-card">`
+        // Har bir kontakt uchun HTML yasaymiz
+        let ContactHTML = `<article class="contact-card">`
         if (Contact.image) {
              ContactHTML += `
-             <img src="${Contact.image}" alt="${Contact.app}">`
+             <a href="${Contact.url}"><img src="${Contact.image}" alt="${Contact.app}"></a>`
         }
         ContactHTML += `
                 <h1><a href="${Contact.url}">${Contact.app}</a></h1>
@@ -140,5 +140,14 @@ async function displaySearchedPosts(name) {
         container.innerHTML += postHTML; // Sahifaga qo'shish
     });
 }
-testConnection();
+
+const About = document.getElementById('about');
+function showhideAbout(){
+    if (About.style.display === 'none')
+        About.style.display = 'flex';
+    else
+        About.style.display = 'none';
+}
+showhideAbout();
+displayContacts();
 displayPosts();

@@ -18,15 +18,25 @@
             <div class="nav-menu">
             <ul>
                 <li><a onclick="displayPosts()">Home</a></li>
-                <li><a href="#">About</a></li>
+                <li><a onclick="showhideAbout()">About</a></li>
                 <li><a onclick="displayContacts()">Contact</a></li>
             </ul>
             </div>
         </nav>
     </header>
+    <section id="about">
+        <img src="https://xhoopiedolojpdkhypfn.supabase.co/storage/v1/object/public/Images%20For%20MyBlog/Photo.JPG">
+        <div class="group">
+           <h1> Majnuniy Shoir </h1>
+           <p> 2003-yil 1-mart </p> 
+        </div>
+    </section>
     <main>
         <container class="posts" id="post-container">
             <!-- Posts will be dynamically inserted here -->
+        </container>
+        <container class="contacts" id="contact-container">
+            <!-- Contacts will be dynamically inserted here -->
         </container>
     </main>
     <footer>
