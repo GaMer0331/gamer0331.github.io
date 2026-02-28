@@ -108,7 +108,7 @@ nav ul li a:active{
     height: 220px;
     padding: 5px;
     border-radius: 5px;
-    object-fit: cover;
+    object-fit: contain;
 }
 .post-card h2 {
     margin-top: 15px;
@@ -167,4 +167,5 @@ footer{
     pointer-events: none;
     max-width: 80%;
 }
+
 #toast.visible { opacity: 1; }
