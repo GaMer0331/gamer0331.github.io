@@ -18,8 +18,9 @@
             <div class="nav-menu">
             <ul>
                 <!-- <li><a onclick="displayPosts()">Home</a></li> -->
-                <li><a onclick="showhideAbout()">About</a></li>
-                <!--  <li><a onclick="displayContacts()">Contact</a></li> -->
+                 <li><a onclick="showhideLogin()">Kirish</a></li>
+                <li><a onclick="showhideAbout()">Haqida</a></li>
+                <!-- <li><a onclick="displayContacts()">Contact</a></li> -->
             </ul>
             </div>
         </nav>
@@ -32,6 +33,22 @@
         </div>
     </section>
     <main>
+        <!-- Login-SigUp Container -->
+
+    <div id="login">
+        <ul class="login">
+            <li><h3>Kirish</h3></li>
+            <li><p>Username:</p><input type="text" id="username" placeholder="Foydalanuvchi nomi"></li>
+            <li><p>Parol:</p><input type="password" id="password" placeholder="parolni kiriting"></li>
+        </ul>
+        <ul class="sign">
+            <li><h3>Ro'yxatdan o'tish</h3></li>
+            <li><p>Username:</p><input type="text" id="username" placeholder="Foydalanuvchi nomi"></li>
+            <li><p>Parol:</p><input type="password" id="password"placeholder="parolni kiriting"></li>
+            <li><p>Parolni tasdiqlang:</p><input type="password" id="confirm-password"placeholder="parolni qayta kiriting"></li>
+        </ul>
+    </div>
+    
         <container class="posts" id="post-container">
             <!-- Posts will be dynamically inserted here -->
         </container>
@@ -46,5 +63,4 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="script.js"></script>
 </body>
-
 </html>

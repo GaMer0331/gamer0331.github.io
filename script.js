@@ -7,7 +7,7 @@ const _supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 const searchInput = document.getElementById('search-input');
 const searchButton = document.getElementById('search-button');
-
+let postType = 0;
 // simple toast helper (auto‑hides in 1s)
 function showToast(msg, duration = 1000) {
     let t = document.getElementById('toast');
@@ -142,12 +142,25 @@ async function displaySearchedPosts(name) {
 }
 
 const About = document.getElementById('about');
+
 function showhideAbout(){
     if (About.style.display === 'none')
         About.style.display = 'flex';
     else
         About.style.display = 'none';
 }
+const log = document.getElementById('login');
+
+function showhideLogin(){
+    if (log.style.display === 'none')
+        log.style.display = 'flex';
+    else
+        log.style.display = 'none';
+}
+function login(){
+
+}
 showhideAbout();
+showhideLogin()
 displayContacts();
 displayPosts();

@@ -20,6 +20,77 @@ main{
     flex-direction: column;
     justify-content: center;
 }
+#login {
+    display: none;
+    overflow:hidden;
+    background-color: #555;
+    position: relative;
+    margin: 10px;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 5px 1px #000000;
+    border: #00b7ff solid 1px;
+    border-radius: 20px;
+}
+#login *{
+    padding: 10px;
+}
+#login ul{
+    width: 100%;;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+#login ul li{
+    padding: 5px;
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    gap: 20px;
+    justify-content:center; /* Gorizontal markazlash */
+    align-items: center;     /* Vertikal markazlash */
+    text-align: center;
+    padding: 10px 20px;      /* Matn atrofida bo'shliq qoldirish */
+    height: auto;            /* Balandlikni matnga qarab moslash */
+    min-width: 150px;        /* Tugma juda kichik bo'lib qolmasligi uchun */
+}
+#login ul li input{
+    padding: 5px;
+    width: 300px;
+}
+#login ul li p{
+    color: #fff;
+    padding: 5px;
+    width: 200px;
+    text-align: start;
+}
+#login ul li h3{
+    color: #f0f0f0;
+}
+#login .login {
+    display: none;
+    flex-direction: column;
+    gap:5px;
+}
+#login .login input{
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.137);
+    box-shadow: 0px 1px 3px 0px #000000;
+    border: none;
+    color: #fff
+}
+#login .sign {
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+}
+#login .sign input{
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.137);
+    box-shadow: 0px 1px 3px 0px #000000;
+    border: none;
+    color: #fff
+}
 nav{
     height: 60px;
     background-color: #333;
@@ -204,15 +275,6 @@ footer{
     nav .search-box {
         display: none;
     }
-    .contacts{
-        gap: 5px;
-    }
-    .contact-card {
-        margin: 5px;
-        padding:  5px;
-        width: 110px;
-        height: 110px;
-    }
     .post-card img {
         width: 100%;
     }
@@ -230,6 +292,12 @@ footer{
     }
     #about *{
         font-size: 10px;
+    }
+    #login {
+        margin: 5px;
+    }
+    #login ul li{
+        gap:5px;
     }
     
 }
@@ -251,5 +319,4 @@ footer{
     pointer-events: none;
     max-width: 80%;
 }
-
 #toast.visible { opacity: 1; }
