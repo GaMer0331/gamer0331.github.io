@@ -5,6 +5,7 @@ body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f0f0f0;
     margin: 0;
+    overflow-x:hidden;
 }
 header{
    margin: 0 auto;
@@ -319,4 +320,5 @@ footer{
     pointer-events: none;
     max-width: 80%;
 }
+
 #toast.visible { opacity: 1; }
