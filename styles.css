@@ -57,12 +57,12 @@ main{
 }
 #login ul li input{
     padding: 5px;
-    width: 300px;
+    width: 150px;
 }
 #login ul li p{
     color: #fff;
     padding: 5px;
-    width: 200px;
+    width: 100px;
     text-align: start;
 }
 #login ul li h3{
@@ -322,3 +322,4 @@ footer{
 }
 
 #toast.visible { opacity: 1; }
+
