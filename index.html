@@ -10,7 +10,7 @@
 <body>
     <header>
         <nav>
-            <img src="https://xhoopiedolojpdkhypfn.supabase.co/storage/v1/object/public/Images%20For%20MyBlog/logo.png" alt="Blog Logo" class="logo">
+            <img  onclick="reload()" src="https://xhoopiedolojpdkhypfn.supabase.co/storage/v1/object/public/Images%20For%20MyBlog/logo.png" alt="Blog Logo" class="logo">
             <div class="search-box">
                 <input id="search-input" type="text" placeholder="Maqola qidirish...">
                 <button id="search-button">Qidirish</button>
@@ -18,7 +18,7 @@
             <div class="nav-menu">
             <ul>
                 <!-- <li><a onclick="displayPosts()">Home</a></li> -->
-                 <li><a onclick="showhideLogin()">Kirish</a></li>
+                 <li><a id="aut" onclick="showhideLogin()">Kirish</a></li>
                 <li><a onclick="showhideAbout()">Haqida</a></li>
                 <!-- <li><a onclick="displayContacts()">Contact</a></li> -->
             </ul>
@@ -35,20 +35,44 @@
     <main>
         <!-- Login-SigUp Container -->
 
-    <div id="login">
-        <ul class="login">
-            <li><h3>Kirish</h3></li>
-            <li><p>Username:</p><input type="text" id="username" placeholder="Foydalanuvchi nomi"></li>
-            <li><p>Parol:</p><input type="password" id="password" placeholder="parolni kiriting"></li>
-        </ul>
-        <ul class="sign">
-            <li><h3>Ro'yxatdan o'tish</h3></li>
-            <li><p>Username:</p><input type="text" id="username" placeholder="Foydalanuvchi nomi"></li>
-            <li><p>Parol:</p><input type="password" id="password"placeholder="parolni kiriting"></li>
-            <li><p>Parolni tasdiqlang:</p><input type="password" id="confirm-password"placeholder="parolni qayta kiriting"></li>
-        </ul>
-    </div>
+    <!-- simplified authentication container -->
+    <div id="auth-container" style="display: none;">
+        <h3 id="auth-title">Kirish</h3>
+        
+        <div class="input-group">
+            <p>E-mail:</p>
+            <input type="text" id="email" placeholder="E-mailni kiriting">
+        </div>
+        
+        <div class="input-group">
+            <p>Parol:</p>
+            <input type="password" id="password" placeholder="Parolni kiriting">
+        </div>
     
+        <div id="confirm-group" style="display: none;">
+            <p>Parolni tasdiqlang:</p>
+            <input type="password" id="confirm-password" placeholder="Parolni qayta kiriting">
+        </div>
+    
+        <div class="buttons">
+            <button id="main-btn" onclick="handleAuth()">Kirish</button>
+            <p id="toggle-text">Hisobingiz yo'qmi? <a href="#" onclick="toggleMode()">Ro'yxatdan o'tish</a></p>
+        </div>
+    </div>
+    <div id="addpost">
+        <div>
+            <h3>Maqola joylash</h3>
+            <button id="Exit">Chiqish</button>
+            <button id="Create" onclick="uploadImage()">Yaratish</button>
+        </div>
+        <div class="post-card" id="cpost">
+            <input type="file" id="fileInput" accept="image/*">
+                <br>
+            <img src="https://xhoopiedolojpdkhypfn.supabase.co/storage/v1/object/public/Images%20For%20MyBlog/add-image.jpg" alt="Rasm yuklash" onclick="addimage()" id="post-image">
+            <input type="text" placeholder="maqola sarlavhasi" id="'post-header">
+            <textarea oninput="autoheight(this)" placeholder="maqola matni" id="'post-text"></textarea>
+        </div>
+    </div>
         <container class="posts" id="post-container">
             <!-- Posts will be dynamically inserted here -->
         </container>

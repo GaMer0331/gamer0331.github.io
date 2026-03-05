@@ -1,11 +1,12 @@
 *{
     box-sizing: border-box;
+    transition: 0.5 ease-in-out;
 }
 body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f0f0f0;
     margin: 0;
-    overflow-x:hidden;
+    overflow-x: hidden;
 }
 header{
    margin: 0 auto;
@@ -21,77 +22,74 @@ main{
     flex-direction: column;
     justify-content: center;
 }
-#login {
+/* authentication container (login/signup) */
+#auth-container {
+    overflow: hidden;
     display: none;
-    overflow:hidden;
     background-color: #555;
+    color: #fff;
     position: relative;
-    margin: 10px;
-    flex-direction: column;
-    align-items: center;
+    margin: 10px auto;
+    padding: 20px;
+    max-width: 400px;
     box-shadow: 0 2px 5px 1px #000000;
     border: #00b7ff solid 1px;
     border-radius: 20px;
+    flex-direction: column;
+    align-items: center;
 }
-#login *{
-    padding: 10px;
+#auth-container * {
+    transition: 0.3s ease-in-out;
 }
-#login ul{
-    width: 100%;;
-    display: flex;
-    justify-content: center;
-    list-style: none;
+
+#auth-container .input-group,
+#auth-container #confirm-group {
+    margin-bottom: 10px;
+    width: 100%;
 }
-#login ul li{
-    padding: 5px;
-    display: flex;
-    flex-grow: 1;
-    flex-shrink: 1;
-    gap: 20px;
-    justify-content:center; /* Gorizontal markazlash */
-    align-items: center;     /* Vertikal markazlash */
-    text-align: center;
-    padding: 10px 20px;      /* Matn atrofida bo'shliq qoldirish */
-    height: auto;            /* Balandlikni matnga qarab moslash */
-    min-width: 150px;        /* Tugma juda kichik bo'lib qolmasligi uchun */
-}
-#login ul li input{
-    padding: 5px;
-    width: 150px;
-}
-#login ul li p{
+
+#auth-container input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.137);
+    box-shadow: 0px 1px 3px 0px #000000;
+    border: none;
     color: #fff;
-    padding: 5px;
-    width: 100px;
-    text-align: start;
 }
-#login ul li h3{
-    color: #f0f0f0;
+
+#auth-container .buttons {
+    text-align: center;
 }
-#login .login {
-    display: none;
-    flex-direction: column;
-    gap:5px;
-}
-#login .login input{
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.137);
-    box-shadow: 0px 1px 3px 0px #000000;
+
+#auth-container .buttons #main-btn {
+    margin-top: 15px;
+    padding: 8px 16px;
     border: none;
-    color: #fff
-}
-#login .sign {
-    display: flex;
-    flex-direction: column;
-    gap:5px;
-}
-#login .sign input{
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.137);
-    box-shadow: 0px 1px 3px 0px #000000;
-    border: none;
-    color: #fff
+    background: rgba(255, 255, 255, 0.137);
+    color: #fff;
+    cursor: pointer;
 }
+#auth-container .buttons #main-btn:hover{
+    background: rgba(0, 131, 22, 0.411);
+    outline: #009213 solid 1px;
+    box-shadow: 0px 2px 4px #000000;
+}
+#auth-container .buttons #main-btn:active{
+    background: rgba(0, 255, 42, 0.411);
+    outline: #00ff22 solid 1px;
+    box-shadow: none;
+}
+
+#auth-container .buttons a {
+    color: #ffffff70;
+    text-decoration: none;
+}
+#auth-container .buttons a:hover {
+    color: #00ff15b6;
+}
+
 nav{
     height: 60px;
     background-color: #333;
@@ -106,6 +104,7 @@ nav img{
     aspect-ratio: 1/1;
     padding: 5px;
     filter: invert(1);
+    cursor: pointer;
 }
 nav .search-box input {
     padding: 5px 15px;
@@ -187,6 +186,7 @@ nav ul li a:active{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    min-width: 30px;
 }
 .contact-card img{
     width: 50px;
@@ -272,6 +272,87 @@ footer{
     padding: 10px;
     margin-top: 20px;
 }
+#addpost{
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+#addpost *{
+    transition: 0.3s all ease-in-out;
+}
+#addpost button {
+    margin-top: 15px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.473);
+    color: #ffffff;
+    cursor: pointer;
+    
+}
+#addpost button:hover{
+    background: rgba(1, 95, 18, 0.534);
+    outline: #009213 solid 1px;
+    box-shadow: 0px 2px 4px #000000;
+}
+#addpost button:active{
+    background: rgba(0, 255, 42, 0.411);
+    outline: #00ff22 solid 1px;
+    box-shadow: none;
+}
+#cpost {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #fff;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    width: 60%;
+}
+#cpost #post-image {
+    display: none;
+    height: 220px;
+    padding: 5px;
+    border-radius: 5px;
+    object-fit: contain;
+}
+#cpost #post-header {
+    margin-bottom: 10px;
+    align-self: center;
+    padding: 10px;
+}
+#cpost #post-text {
+    color: #555;
+    white-space: wrap;
+    padding: 5px;
+    height: 100%;
+    resize: vertical;
+}
+#cpost input {
+    border-radius: 1rem;
+    outline: none;
+    height: 2rem;
+    width: 100%;
+    margin: 10px;
+    padding: 5px;
+    text-align: center;
+    font-size: 15px;
+}
+#cpost textarea {
+    border-radius: 1rem;
+    outline: none;
+    height: 1.5rem;
+    margin: 10px;
+    padding:10px;
+    text-align: center;
+    min-height: 4rem;
+    width: 100%;
+    resize: none;
+}
 @media screen and (max-width: 800px) {
     nav .search-box {
         display: none;
@@ -294,11 +375,15 @@ footer{
     #about *{
         font-size: 10px;
     }
-    #login {
-        margin: 5px;
+    #auth-container {
+        margin: 5px auto;
+        width: 70%;
     }
-    #login ul li{
+    .contacts{
         gap:5px;
+    }
+    .contact-card{
+        min-width: 30px;
     }
     
 }
@@ -320,6 +405,4 @@ footer{
     pointer-events: none;
     max-width: 80%;
 }
-
 #toast.visible { opacity: 1; }
-

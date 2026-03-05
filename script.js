@@ -141,7 +141,117 @@ async function displaySearchedPosts(name) {
     });
 }
 
+
+
+// authentication UI toggle and handler
+
+function autoheight(element){
+    element.style.height = "10px";
+    element.style.height = (element.scrollHeight) + "px";
+}
+
+let isLoginMode = true;
+
+function toggleMode() {
+    isLoginMode = !isLoginMode;
+    const title = document.getElementById('auth-title');
+    const mainBtn = document.getElementById('main-btn');
+    const confirmGroup = document.getElementById('confirm-group');
+    const toggleLink = document.querySelector('#toggle-text a');
+
+    if (isLoginMode) {
+        title.innerText = "Kirish";
+        mainBtn.innerText = "Kirish";
+        confirmGroup.style.display = "none";
+        toggleLink.innerText = "Ro'yxatdan o'tish";
+    } else {
+        title.innerText = "Ro'yxatdan o'tish";
+        mainBtn.innerText = "Ro'yxatdan o'tish";
+        confirmGroup.style.display = "block";
+        toggleLink.innerText = "Kirishga qaytish";
+    }
+}
+
+async function handleAuth() {
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const confirm = document.getElementById('confirm-password').value.trim();
+
+    if (!email || !password) {
+        showToast("E-mail va parolni kiriting");
+        return;
+    }
+    if (!isLoginMode && password !== confirm) {
+        showToast("Parollar mos emas");
+        return;
+    }
+
+    if (isLoginMode) {
+        const { data, error } = await _supabase.auth.signInWithPassword({ email, password });
+        if (error) showToast(error.message);
+        else showToast("Kirish muvaffaqiyatli");
+    } else {
+        const { data, error } = await _supabase.auth.signUp({ email, password });
+        if (error) showToast(error.message);
+        else showToast("Ro'yxatdan o'tish muvaffaqiyatli");
+    }
+}
+
+// rasm yuklash
+const fileInput = document.getElementById('fileInput');
+const preview = document.getElementById('post-image');
+let image="";
+
+fileInput.addEventListener('change', function() {
+    const file = this.files[0]; // Tanlangan birinchi faylni olish
+
+    if (file) {
+        const reader = new FileReader(); // Faylni o'qish uchun obyekt
+
+        reader.onload = function(e) {
+            preview.src = e.target.result; // Rasmni URL ko'rinishida yuklash
+            preview.style.display = 'block'; // Rasmni ko'rinadigan qilish
+            preview.style.objectFit = 'cover'; // Rasmni ko'rinadigan qilish
+        }
+
+        reader.readAsDataURL(file); // Faylni o'qishni boshlash
+    }
+});
+
+// Images For MyBlog
+async function uploadImage() {
+    const file = fileInput.files[0];
+
+    if (!file) {
+        alert("Iltimos, avval rasm tanlang!");
+        return;
+    }
+    showToast("rasmni serverga yuklash!");
+    // Fayl nomi takrorlanmasligi uchun vaqt belgisini qo'shamiz
+    const fileName = `${Date.now()}_${file.name}`;
+
+    const { data, error } = await _supabase.storage
+        .from('Images For MyBlog') // Bucket nomi
+        .upload(fileName, file);
+
+    if (error) {
+        console.error("Yuklashda xato:", error.message);
+        alert("Xatolik yuz berdi!");
+    } else {
+        console.log("Muvaffaqiyatli yuklandi:", data);
+        
+        // Yuklangan rasmning URL manzilini olish
+        const { data: publicUrlData } = _supabase.storage
+            .from('Images For MyBlog')
+            .getPublicUrl(fileName);
+            
+        console.log("Rasm URL manzili:", publicUrlData.publicUrl);
+        alert("Rasm muvaffaqiyatli yuklandi!");
+    }
+}
+
 const About = document.getElementById('about');
+const authContainer = document.getElementById('auth-container');
 
 function showhideAbout(){
     if (About.style.display === 'none')
@@ -149,18 +259,19 @@ function showhideAbout(){
     else
         About.style.display = 'none';
 }
-const log = document.getElementById('login');
 
 function showhideLogin(){
-    if (log.style.display === 'none')
-        log.style.display = 'flex';
+    if (authContainer.style.display === 'none')
+        authContainer.style.display = 'flex';
     else
-        log.style.display = 'none';
+        authContainer.style.display = 'none';
 }
-function login(){
 
-}
 showhideAbout();
-showhideLogin()
-displayContacts();
-displayPosts();
+reload();
+
+function reload(){
+    showToast("sahifa yuklanmoqda...");
+    displayContacts();
+    displayPosts();
+}
