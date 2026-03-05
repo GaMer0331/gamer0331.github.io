@@ -59,20 +59,22 @@
             <p id="toggle-text">Hisobingiz yo'qmi? <a href="#" onclick="toggleMode()">Ro'yxatdan o'tish</a></p>
         </div>
     </div>
+    
     <div id="addpost">
         <div>
             <h3>Maqola joylash</h3>
-            <button id="Exit">Chiqish</button>
+            <button id="Exit" onclick="signOut()">Chiqish</button>
             <button id="Create" onclick="uploadImage()">Yaratish</button>
         </div>
         <div class="post-card" id="cpost">
             <input type="file" id="fileInput" accept="image/*">
                 <br>
             <img src="https://xhoopiedolojpdkhypfn.supabase.co/storage/v1/object/public/Images%20For%20MyBlog/add-image.jpg" alt="Rasm yuklash" onclick="addimage()" id="post-image">
-            <input type="text" placeholder="maqola sarlavhasi" id="'post-header">
-            <textarea oninput="autoheight(this)" placeholder="maqola matni" id="'post-text"></textarea>
+            <input type="text" placeholder="maqola sarlavhasi" id="post-header">
+            <textarea oninput="autoheight(this)" placeholder="maqola matni" id="post-text"></textarea>
         </div>
     </div>
+
         <container class="posts" id="post-container">
             <!-- Posts will be dynamically inserted here -->
         </container>

@@ -145,6 +145,16 @@ async function displaySearchedPosts(name) {
 
 // authentication UI toggle and handler
 
+async function signOut() {
+    const { error } = await _supabase.auth.signOut();
+    
+    if (error) {
+        console.error("Chiqishda xato:", error.message);
+    } else {
+        alert("Siz tizimdan chiqdingiz!");
+    }
+}
+
 function autoheight(element){
     element.style.height = "10px";
     element.style.height = (element.scrollHeight) + "px";
@@ -171,6 +181,8 @@ function toggleMode() {
         toggleLink.innerText = "Kirishga qaytish";
     }
 }
+const addpost = document.getElementById("addpost");
+addpost.style.display = "none";
 
 async function handleAuth() {
     const email = document.getElementById('email').value.trim();
@@ -189,14 +201,20 @@ async function handleAuth() {
     if (isLoginMode) {
         const { data, error } = await _supabase.auth.signInWithPassword({ email, password });
         if (error) showToast(error.message);
-        else showToast("Kirish muvaffaqiyatli");
+        else 
+            {
+                showToast("Kirish muvaffaqiyatli");
+            }
+        
     } else {
         const { data, error } = await _supabase.auth.signUp({ email, password });
         if (error) showToast(error.message);
         else showToast("Ro'yxatdan o'tish muvaffaqiyatli");
     }
 }
-
+// post malumotlari
+const postheader = document.getElementById('post-header');
+const posttext = document.getElementById('post-header');
 // rasm yuklash
 const fileInput = document.getElementById('fileInput');
 const preview = document.getElementById('post-image');
@@ -244,16 +262,68 @@ async function uploadImage() {
         const { data: publicUrlData } = _supabase.storage
             .from('Images For MyBlog')
             .getPublicUrl(fileName);
-            
-        console.log("Rasm URL manzili:", publicUrlData.publicUrl);
+        
+        image = publicUrlData.publicUrl;
+        console.log("Rasm URL manzili:", image);
         alert("Rasm muvaffaqiyatli yuklandi!");
+        post();
     }
 }
+
+//   Maqola joylash >>>
+async function post() {
+    // 1. Ma'lumotlarni bazaga yuborish
+    showToast(postheader.value + ' ' + posttext.value);
+    const { data, error } = await _supabase
+        .from('posts')
+        .insert([
+            { 
+                title: postheader.value, 
+                content: posttext.value, 
+                image_url: image
+            }
+        ]);
+
+    if (error) {
+        console.error("Xatolik yuz berdi:", error.message);
+        showToast("Maqolani joylashda xato!");
+    } else {
+        console.log("Muvaffaqiyatli joylandi:", data);
+        showToast("G'alaba! Maqola serverga joylandi.");
+        
+        // Sahifani yangilash (yangi maqola ko'rinishi uchun)
+        window.location.reload();
+    }
+}
+let showtype = 0;
+_supabase.auth.onAuthStateChange((event, session) => {
+  if (session) {
+    console.log("Foydalanuvchi tizimda:", session.user.email);
+    // Masalan: Admin panelni ko'rsatish
+    authContainer.style.display = 'none'
+    document.getElementById('aut').innerText = "Maqola Yaratish";
+    showtype = 1;
+    
+    
+    // UUID tekshiruvi (Aynan siz ekanligingizni bilish uchun)
+    if (session.user.id === '8af31309-2532-400c-a93e-a479548a879e') {
+        console.log("Xush kelibsiz, Admin!");
+        addpost.style.display = "flex";
+    }
+  } else {
+    console.log("Foydalanuvchi tizimda emas");
+    // Masalan: Login formasini ko'rsatish
+    showtype = 0;
+    addpost.style.display = "none";
+    document.getElementById('aut').innerText = "Kirish";
+  }
+});
 
 const About = document.getElementById('about');
 const authContainer = document.getElementById('auth-container');
 
 function showhideAbout(){
+    showToast(' login showing');
     if (About.style.display === 'none')
         About.style.display = 'flex';
     else
@@ -261,12 +331,26 @@ function showhideAbout(){
 }
 
 function showhideLogin(){
-    if (authContainer.style.display === 'none')
+    if(showtype === 1)
+    {   if (addpost.style.display === 'none')
+        addpost.style.display = 'flex';
+    else
+        addpost.style.display = 'none';
+    }
+    else{
+        if (authContainer.style.display === 'none')
         authContainer.style.display = 'flex';
     else
         authContainer.style.display = 'none';
+    }
 }
-
+function showhidePost(){
+    showToast(' post showing');
+    if (addpost.style.display === 'none')
+        addpost.style.display = 'flex';
+    else
+        addpost.style.display = 'none';
+}
 showhideAbout();
 reload();
 
