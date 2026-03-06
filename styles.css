@@ -226,6 +226,7 @@ nav ul li a:active{
     width: fit-content;
 }
 .post-card img {
+    width: 100%;
     height: 220px;
     padding: 5px;
     border-radius: 5px;

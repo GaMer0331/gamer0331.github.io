@@ -42,7 +42,6 @@ async function testConnection() {
 }
 
 async function displayPosts() {
-    showToast("Maqolalar yuklanmoqda...");
     const { data: posts, error } = await _supabase.from('posts').select('*');
 
     if (error) {
@@ -70,7 +69,6 @@ async function displayPosts() {
 }
 
 async function displayContacts() {
-    showToast("Kontaktlar yuklanmoqda...");
     const { data: Contacts, error } = await _supabase.from('Contacts').select('*');
 
     if (error) {
@@ -323,6 +321,7 @@ _supabase.auth.onAuthStateChange((event, session) => {
   } else {
     console.log("Foydalanuvchi tizimda emas");
     // Masalan: Login formasini ko'rsatish
+    showToast('Siz mehmon sifatida kirdingiz, boshqa sherlarni o\'qish uchun ro\'yxatdan o\'ting.',2500);
     showtype = 0;
     addpost.style.display = "none";
     document.getElementById('aut').innerText = "Kirish";
@@ -376,7 +375,6 @@ showhideAbout();
 reload();
 
 function reload(){
-    showToast("sahifa yuklanmoqda...");
     displayContacts();
     displayPosts();
 }
