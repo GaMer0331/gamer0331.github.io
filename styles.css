@@ -317,7 +317,6 @@ footer{
     width: 60%;
 }
 #cpost .inimage{
-    display: none;
     margin: 10px;
     border: 1px solid rgba(0, 0, 0, 0.753);
     box-shadow: 0px 1px 3px 0px hsl(189, 100%, 50%);

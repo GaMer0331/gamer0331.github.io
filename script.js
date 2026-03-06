@@ -239,7 +239,11 @@ fileInput.addEventListener('change', function() {
 // Images For MyBlog
 async function uploadImage() {
     const file = fileInput.files[0];
-
+    if(postheader.value=="" || posttext=="")
+        {
+            showToast("Bo'sh maydonlarni to'ldiring!");
+            return;
+        }
     if (!file) {
         alert("Iltimos, avval rasm tanlang!");
         return;
@@ -370,5 +374,4 @@ function reload(){
     showToast("sahifa yuklanmoqda...");
     displayContacts();
     displayPosts();
-
 }
