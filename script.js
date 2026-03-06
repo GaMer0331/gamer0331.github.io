@@ -214,7 +214,7 @@ async function handleAuth() {
 }
 // post malumotlari
 const postheader = document.getElementById('post-header');
-const posttext = document.getElementById('post-header');
+const posttext = document.getElementById('post-text');
 // rasm yuklash
 const fileInput = document.getElementById('fileInput');
 const preview = document.getElementById('post-image');
@@ -370,4 +370,5 @@ function reload(){
     showToast("sahifa yuklanmoqda...");
     displayContacts();
     displayPosts();
+
 }
