@@ -255,11 +255,14 @@ nav ul li a:active{
     margin: 10px;
     padding: 10px;
     display: none;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
+    gap: 25px;
     align-items: center;
     border: #000000 1px solid;
     box-shadow: rgba(0, 0, 0, 0.3);
     border-radius: 10px;
+    transition: 0.3 ease-in-out;
 }
 #about img{
     width: 150px;
@@ -304,6 +307,7 @@ footer{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     background-color: #fff;
     padding: 20px;
     margin: 10px;
@@ -312,8 +316,13 @@ footer{
     margin-bottom: 20px;
     width: 60%;
 }
-#cpost #post-image {
+#cpost .inimage{
     display: none;
+    margin: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.753);
+    box-shadow: 0px 1px 3px 0px hsl(189, 100%, 50%);
+}
+#cpost #post-image {
     height: 220px;
     padding: 5px;
     border-radius: 5px;
@@ -331,20 +340,19 @@ footer{
     height: 100%;
     resize: vertical;
 }
-#cpost input {
+#cpost #post-header {
     border-radius: 1rem;
     outline: none;
     height: 2rem;
     width: 100%;
     margin: 10px;
-    padding: 5px;
+    padding: 10px;
     text-align: center;
-    font-size: 15px;
 }
-#cpost textarea {
+#cpost #post-text {
     border-radius: 1rem;
     outline: none;
-    height: 1.5rem;
+    height: 2rem;
     margin: 10px;
     padding:10px;
     text-align: center;
@@ -363,7 +371,7 @@ footer{
         flex-grow: 1;
     }
     #about{
-        flex-direction: row;
+        flex-direction: column;
         justify-content: center;
         gap: 20px;
         overflow: hidden;

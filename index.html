@@ -67,9 +67,20 @@
             <button id="Create" onclick="uploadImage()">Yaratish</button>
         </div>
         <div class="post-card" id="cpost">
-            <input type="file" id="fileInput" accept="image/*">
-                <br>
-            <img src="https://xhoopiedolojpdkhypfn.supabase.co/storage/v1/object/public/Images%20For%20MyBlog/add-image.jpg" alt="Rasm yuklash" onclick="addimage()" id="post-image">
+            <div id="params-page">
+            <div class="param">
+                <label>Maqolaning ommaviyligi:</label>
+                <input id="post-type" type="checkbox">
+            </div>
+            <div id="param">
+                <label>Tasvir biriktirish:</label>
+                <input type="checkbox" onchange="showhideinimage(this.checked)">
+            </div>
+            <div>
+                <input class="inimage" type="file" id="fileInput" accept="image/*">
+            </div>
+            </div>
+            <img class="inimage" src="https://xhoopiedolojpdkhypfn.supabase.co/storage/v1/object/public/Images%20For%20MyBlog/add-image.jpg" alt="Rasm yuklash" onclick="addimage()" id="post-image">
             <input type="text" placeholder="maqola sarlavhasi" id="post-header">
             <textarea oninput="autoheight(this)" placeholder="maqola matni" id="post-text"></textarea>
         </div>

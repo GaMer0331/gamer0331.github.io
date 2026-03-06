@@ -280,7 +280,8 @@ async function post() {
             { 
                 title: postheader.value, 
                 content: posttext.value, 
-                image_url: image
+                image_url: image,
+                type: document.getElementById("post-type").checked
             }
         ]);
 
@@ -345,12 +346,23 @@ function showhideLogin(){
     }
 }
 function showhidePost(){
-    showToast(' post showing');
+    showToast('post showing');
     if (addpost.style.display === 'none')
         addpost.style.display = 'flex';
     else
         addpost.style.display = 'none';
 }
+const inimage = document.getElementsByClassName("inimage");
+
+function showhideinimage(inimagedisplay){
+    for (const element of inimage) {
+        if (inimagedisplay)
+            element.style.display = "block";
+        else
+            element.style.display = "none"
+    }
+}
+showhideinimage(false)
 showhideAbout();
 reload();
 
