@@ -244,6 +244,11 @@ async function uploadImage() {
             showToast("Bo'sh maydonlarni to'ldiring!");
             return;
         }
+        if(!document.getElementById("insimage").checked){
+            image = "";
+            post();
+            return;
+        }
     if (!file) {
         alert("Iltimos, avval rasm tanlang!");
         return;
