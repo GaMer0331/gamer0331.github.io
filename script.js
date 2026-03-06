@@ -326,6 +326,7 @@ _supabase.auth.onAuthStateChange((event, session) => {
     addpost.style.display = "none";
     document.getElementById('aut').innerText = "Kirish";
   }
+  reload();
 });
 
 const About = document.getElementById('about');
