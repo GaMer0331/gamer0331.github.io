@@ -309,14 +309,16 @@ _supabase.auth.onAuthStateChange((event, session) => {
     console.log("Foydalanuvchi tizimda:", session.user.email);
     // Masalan: Admin panelni ko'rsatish
     authContainer.style.display = 'none'
-    document.getElementById('aut').innerText = "Maqola Yaratish";
-    showtype = 1;
+    document.getElementById('aut').innerText = "Chiqish";
+    showtype = 2;
     
     
     // UUID tekshiruvi (Aynan siz ekanligingizni bilish uchun)
     if (session.user.id === '8af31309-2532-400c-a93e-a479548a879e') {
         console.log("Xush kelibsiz, Admin!");
         addpost.style.display = "flex";
+        document.getElementById('aut').innerText = "Maqola Yaratish";
+        showtype = 1;
     }
   } else {
     console.log("Foydalanuvchi tizimda emas");
@@ -348,6 +350,8 @@ function showhideLogin(){
     else
         addpost.style.display = 'none';
     }
+    else if(showtype === 2)
+        signOut();
     else{
         if (authContainer.style.display === 'none')
         authContainer.style.display = 'flex';
