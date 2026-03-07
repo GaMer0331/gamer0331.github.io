@@ -26,20 +26,6 @@ searchButton.addEventListener('click', async () => {
     const name = searchInput.value.trim();
     displaySearchedPosts(name);
 });
-// 3. Ulanishni tekshirish uchun kichik test
-async function testConnection() {
-    try {
-        const { data, error } = await _supabase.from('posts').select('*');
-        
-        if (error) {
-            console.error("Ulanishda xato bor:", error.message);
-        } else {
-            console.log("G'alaba! Bazadan ma'lumot keldi:", data);
-        }
-    } catch (err) {
-        console.error("Kutilmagan xato:", err);
-    }
-}
 
 async function displayPosts() {
     const { data: posts, error } = await _supabase.from('posts').select('*');
@@ -302,6 +288,20 @@ async function post() {
         // Sahifani yangilash (yangi maqola ko'rinishi uchun)
         window.location.reload();
     }
+}
+async function signInWithGoogle() {
+  const { data, error } = await _supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: 'https://gamer0331.github.io' // yoki production URL
+    }
+  })
+
+  if (error) {
+    console.error('Login xatosi:', error.message)
+  } else {
+    console.log('Google login boshlandi:', data)
+  }
 }
 let showtype = 0;
 _supabase.auth.onAuthStateChange((event, session) => {

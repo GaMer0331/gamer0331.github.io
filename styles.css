@@ -198,6 +198,7 @@ nav ul li a:active{
     transition: 0.5s ease-in-out;
 }
 .contact-card img:hover{
+    width: 60px;
     filter: brightness(1) saturate(1);
     box-shadow: 0 4px 10px;
 }
@@ -213,6 +214,7 @@ nav ul li a:active{
 }
 .contact-card h1 a:hover{
     color: #1dbd32;
+    font-size: 1rem;
 }
 .post-card {
     flex-shrink: 0;
@@ -250,7 +252,29 @@ nav ul li a:active{
     text-decoration: none;
     font-weight: bold;
 }
-
+.oauth {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.oauth img{
+    border: #fff 1px solid;
+    width: 50px;
+    height: 100%;
+    padding: 1px;
+    border-radius: 100%;
+    object-fit: cover;
+    filter: saturate(0);
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+}
+.oauth img:hover{
+    width: 60px;
+    background-color: #fff;
+    filter: saturate(1);
+    box-shadow: 0 4px 10px;
+}
 /* About section */
 #about{
     margin: 10px;
