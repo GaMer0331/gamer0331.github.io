@@ -257,6 +257,7 @@ nav ul li a:active{
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    gap: 10px;
 }
 .oauth img{
     border: #fff 1px solid;

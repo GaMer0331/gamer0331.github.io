@@ -293,7 +293,7 @@ async function signInWithGoogle() {
   const { data, error } = await _supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: 'https://gamer0331.github.io' // yoki production URL
+      redirectTo: 'reload()' // yoki production URL
     }
   })
 
