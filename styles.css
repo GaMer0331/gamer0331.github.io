@@ -226,6 +226,10 @@ nav ul li a:active{
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
     width: fit-content;
+    height: fit-content;
+}
+.post-card *{
+    transition:all 0.3s ease-in-out;
 }
 .post-card img {
     width: 100%;
@@ -251,6 +255,43 @@ nav ul li a:active{
     color: #1dbd32;
     text-decoration: none;
     font-weight: bold;
+}
+.post-card .buttons{
+    display: flex;
+    justify-content: space-between;
+    gap:10px;
+}
+.post-card .buttons button{
+    height: 50px;
+    display: flex;
+    gap:5px;
+    align-items: center;
+    border-radius: 1rem;
+    overflow: hidden;
+    border: none;
+    cursor: pointer;
+}
+.post-card .buttons #like img{
+    height: 100px;
+    width: 40px;
+    margin: 5px;
+}
+.post-card .buttons #message img{
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+}
+.post-card .buttons button:hover{
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 3px 0px black ;
+    outline: #00b7ff;
+    background-color: aqua;
+    font-size: 20px;
+}
+.post-card .buttons button:active{
+    box-shadow: none;
+    background-color: blue;
+    color: white;
 }
 .oauth {
     display: flex;

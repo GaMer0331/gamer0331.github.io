@@ -28,7 +28,7 @@ searchButton.addEventListener('click', async () => {
 });
 
 async function displayPosts() {
-    const { data: posts, error } = await _supabase.from('posts').select('*');
+    const { data: posts, error } = await _supabase.from('posts').select('*,likes:likes(count)');
 
     if (error) {
         console.error("Xato:", error.message);
@@ -37,6 +37,7 @@ async function displayPosts() {
 
     const container = document.getElementById('post-container');
     container.innerHTML = ''; // Oldingi matnlarni tozalash
+    let i=0;
 
     posts.forEach(post => {
         // Har bir maqola uchun HTML yasaymiz
@@ -48,12 +49,48 @@ async function displayPosts() {
         postHTML += `
                 <h1>${post.title}</h1>
                 <p>${post.content}</p>
+                <div class="buttons">
+                <button id="like" onclick="toggleLike(${post.id})"><img src="https://xhoopiedolojpdkhypfn.supabase.co/storage/v1/object/public/Images%20For%20MyBlog/like.png">Like: ${post.likes[0].count}</button>
+                <button id="message" onclick="sendComment(${post.id})"><img src="https://xhoopiedolojpdkhypfn.supabase.co/storage/v1/object/public/Images%20For%20MyBlog/message.png">Izoh Qoldirish</button>
+                </div>
             </article>
         `;
+        i++;
         container.innerHTML += postHTML; // Sahifaga qo'shish
     });
 }
+// izohlarni yuborish
+async function sendComment(postId) {
+    alert("Ushbu qism hali yakunlanmagan! \n Noqulayliklar uchun uzr.");
+}
+// likelarni hisoblash
+async function toggleLike(postId) {
+    const { data: { user } } = await _supabase.auth.getUser();
+    
+    if (!user) {
+        alert("Like bosish uchun tizimga kiring!");
+        return;
+    }
 
+    // Avval like bormi yoki yo'qligini tekshiramiz
+    const { data: existingLike } = await _supabase
+        .from('likes')
+        .select('*')
+        .eq('post_id', postId)
+        .eq('user_id', user.id)
+        .maybeSingle();
+
+    if (existingLike) {
+        // Agar like bo'lsa, o'chirib tashlaymiz (Unlike)
+        await _supabase.from('likes').delete().eq('id', existingLike.id);
+        showToast('Likelar soni 1 taga kamaydi!');
+    } else {
+        // Agar like bo'lmasa, qo'shamiz
+        await _supabase.from('likes').insert([{ post_id: postId, user_id: user.id }]);
+        showToast('Likelar soni 1 taga ko\'paydi!');
+    }
+    reload();
+}
 async function displayContacts() {
     const { data: Contacts, error } = await _supabase.from('Contacts').select('*');
 
