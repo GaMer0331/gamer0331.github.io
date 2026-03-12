@@ -50,8 +50,8 @@ async function displayPosts() {
                 <h1>${post.title}</h1>
                 <p>${post.content}</p>
                 <div class="buttons">
-                <button id="like" onclick="toggleLike(${post.id})"><img src="https://xhoopiedolojpdkhypfn.supabase.co/storage/v1/object/public/Images%20For%20MyBlog/like.png">Like: ${post.likes[0].count}</button>
-                <button id="message" onclick="sendComment(${post.id})"><img src="https://xhoopiedolojpdkhypfn.supabase.co/storage/v1/object/public/Images%20For%20MyBlog/message.png">Izoh Qoldirish</button>
+                <button id="like" onclick="toggleLike(${post.id},this)"><img src="https://xhoopiedolojpdkhypfn.supabase.co/storage/v1/object/public/Images%20For%20MyBlog/like.png">Like: ${post.likes[0].count}</button>
+                <button id="message" onclick="sendComment(${post.id})">Izoh Qoldirish<img src="https://xhoopiedolojpdkhypfn.supabase.co/storage/v1/object/public/Images%20For%20MyBlog/message.png"></button>
                 </div>
             </article>
         `;
@@ -60,11 +60,11 @@ async function displayPosts() {
     });
 }
 // izohlarni yuborish
-async function sendComment(postId) {
+async function sendComment(postId,btn) {
     alert("Ushbu qism hali yakunlanmagan! \n Noqulayliklar uchun uzr.");
 }
 // likelarni hisoblash
-async function toggleLike(postId) {
+async function toggleLike(postId,btn) {
     const { data: { user } } = await _supabase.auth.getUser();
     
     if (!user) {
@@ -80,16 +80,19 @@ async function toggleLike(postId) {
         .eq('user_id', user.id)
         .maybeSingle();
 
+        let currentCount = parseInt(btn.textContent.match(/\d+/)[0]);
+        showToast(currentCount,btn.textContent,btn.innerHTML);
     if (existingLike) {
         // Agar like bo'lsa, o'chirib tashlaymiz (Unlike)
         await _supabase.from('likes').delete().eq('id', existingLike.id);
         showToast('Likelar soni 1 taga kamaydi!');
+        btn.innerHTML = btn.innerHTML.replace(btn.textContent, "Like: "+(currentCount-1));
     } else {
         // Agar like bo'lmasa, qo'shamiz
         await _supabase.from('likes').insert([{ post_id: postId, user_id: user.id }]);
         showToast('Likelar soni 1 taga ko\'paydi!');
+        btn.innerHTML = btn.innerHTML.replace(btn.textContent, "Like: "+(currentCount+1));
     }
-    reload();
 }
 async function displayContacts() {
     const { data: Contacts, error } = await _supabase.from('Contacts').select('*');
@@ -118,7 +121,7 @@ async function displayContacts() {
 }
 
 async function displaySearchedPosts(name) {
-    const { data: posts, error } = await _supabase.from('posts').select('*');
+    const { data: posts, error } = await _supabase.from('posts').select('*,likes:likes(count)');
 
     if (error) {
         console.error("Xato:", error.message);
@@ -141,6 +144,10 @@ async function displaySearchedPosts(name) {
         postHTML += `
                 <h1>${post.title}</h1>
                 <p>${post.content}</p>
+                <div class="buttons">
+                <button id="like" onclick="toggleLike(${post.id},this)"><img src="https://xhoopiedolojpdkhypfn.supabase.co/storage/v1/object/public/Images%20For%20MyBlog/like.png">Like: ${post.likes[0].count}</button>
+                <button id="message" onclick="sendComment(${post.id})">Izoh Qoldirish<img src="https://xhoopiedolojpdkhypfn.supabase.co/storage/v1/object/public/Images%20For%20MyBlog/message.png"></button>
+                </div>
             </article>
         `;
         container.innerHTML += postHTML; // Sahifaga qo'shish
@@ -156,6 +163,10 @@ async function displaySearchedPosts(name) {
         postHTML += `
                 <h1>${post.title}</h1>
                 <p>${post.content}</p>
+                <div class="buttons">
+                <button id="like" onclick="toggleLike(${post.id},this)"><img src="https://xhoopiedolojpdkhypfn.supabase.co/storage/v1/object/public/Images%20For%20MyBlog/like.png">Like: ${post.likes[0].count}</button>
+                <button id="message" onclick="sendComment(${post.id})">Izoh Qoldirish<img src="https://xhoopiedolojpdkhypfn.supabase.co/storage/v1/object/public/Images%20For%20MyBlog/message.png"></button>
+                </div>
             </article>
         `;
         container.innerHTML += postHTML; // Sahifaga qo'shish
@@ -415,9 +426,9 @@ function showhideinimage(inimagedisplay){
 }
 showhideinimage(false)
 showhideAbout();
+displayContacts();
 reload();
 
 function reload(){
-    displayContacts();
     displayPosts();
 }
